@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="萧瑟, 深度学习">
+  <meta name="keywords" content="原创,深度学习,">
 
 
 
@@ -79,17 +79,18 @@
 
 
 
-<meta name="description" content="分享个人技术心得">
-<meta name="keywords" content="深度学习,推荐系统,NLP">
-<meta property="og:type" content="website">
-<meta property="og:title" content="炼丹实验室">
-<meta property="og:url" content="http://freecoder.com/tags/综述/index.html">
+<meta name="description" content="使用word2vec工具在外部大规模语料上训练得到的向量，可以有效的辅助深度学习模型训练，提高结果。但是实际使用的时候，有很多方式可供选择。  直接用word2vec向量初始化模型embedding,训练的时候允许embedding向量更新。这个方法最为常用，但是遇到不在训练语料中的词，就不能借助外部word2vec向量了。 word2vec向量，先连接全连接层（可以是多层），转化后的向量再作为模">
+<meta name="keywords" content="原创,深度学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何使用word2vec训练的向量来辅助模型训练">
+<meta property="og:url" content="http://freecoder.com/2016/08/15/如何使用word2vec训练的向量来辅助模型训练/index.html">
 <meta property="og:site_name" content="炼丹实验室">
-<meta property="og:description" content="分享个人技术心得">
+<meta property="og:description" content="使用word2vec工具在外部大规模语料上训练得到的向量，可以有效的辅助深度学习模型训练，提高结果。但是实际使用的时候，有很多方式可供选择。  直接用word2vec向量初始化模型embedding,训练的时候允许embedding向量更新。这个方法最为常用，但是遇到不在训练语料中的词，就不能借助外部word2vec向量了。 word2vec向量，先连接全连接层（可以是多层），转化后的向量再作为模">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-03-02T17:12:15.208Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="炼丹实验室">
-<meta name="twitter:description" content="分享个人技术心得">
+<meta name="twitter:title" content="如何使用word2vec训练的向量来辅助模型训练">
+<meta name="twitter:description" content="使用word2vec工具在外部大规模语料上训练得到的向量，可以有效的辅助深度学习模型训练，提高结果。但是实际使用的时候，有很多方式可供选择。  直接用word2vec向量初始化模型embedding,训练的时候允许embedding向量更新。这个方法最为常用，但是遇到不在训练语料中的词，就不能借助外部word2vec向量了。 word2vec向量，先连接全连接层（可以是多层），转化后的向量再作为模">
 
 
 
@@ -119,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://freecoder.com/tags/综述/">
+  <link rel="canonical" href="http://freecoder.com/2016/08/15/如何使用word2vec训练的向量来辅助模型训练/">
 
 
 
 
 
-  <title>标签: 综述 | 炼丹实验室</title>
+  <title>如何使用word2vec训练的向量来辅助模型训练 | 炼丹实验室</title>
   
 
 
@@ -144,7 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -260,52 +261,182 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h2>综述<small>标签</small>
-        </h2>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://freecoder.com/2016/08/15/如何使用word2vec训练的向量来辅助模型训练/">
 
-      <h3 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="萧瑟">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/panda.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="炼丹实验室">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2017/01/24/当AI邂逅艺术：机器写诗综述/" itemprop="url">
-              
-                <span itemprop="name">当AI邂逅艺术：机器写诗综述</span>
-              
-            </a>
         
-      </h3>
+          <h2 class="post-title" itemprop="name headline">如何使用word2vec训练的向量来辅助模型训练</h2>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2017-01-24T10:00:00+08:00" content="2017-01-24">
-          01-24
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-15T10:00:00+08:00">
+                2016-08-15
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/08/15/如何使用word2vec训练的向量来辅助模型训练/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/08/15/如何使用word2vec训练的向量来辅助模型训练/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>使用word2vec工具在外部大规模语料上训练得到的向量，可以有效的辅助深度学习模型训练，提高结果。但是实际使用的时候，有很多方式可供选择。</p>
+<ul>
+<li>直接用word2vec向量初始化模型embedding,训练的时候允许embedding向量更新。<br>这个方法最为常用，但是遇到不在训练语料中的词，就不能借助外部word2vec向量了。</li>
+<li>word2vec向量，先连接全连接层（可以是多层），转化后的向量再作为模型的embedding,训练的时候，word2vec向量保持不变，允许全连接层的参数更新。<br>这个方法，哪怕遇到不在训练语料中的词，只要这个词在外部大规模语料中，能得到word2vec向量，那么就没问题。同时因为word2vec向量在训练的时候固定，因此模型训练涉及的参数会大大减少。<a id="more"></a>
+因为word2vec向量的分布，和模型实际需要的向量分布，可能存在差异，因此这个全连接层的作用，就是对word2vec向量的分布进行调整，让他尽可能接近模型需要的向量分布。</li>
+<li>将word2vec向量拷贝，得到向量A和向量B，训练的时候，向量A保持不变，允许向量B的参数更新，最终embedding向量是A和B的平均。<br>这个idea的想法，其实是限制word2vec向量的调整，避免调整的时候，太偏离原始向量。</li>
+<li><ol>
+<li>第一轮训练，用Google News训练好的Word2vec初始化embedding,对未知词随机初始化embedding,在训练的时候,固定住word2vec初始化的embedding,而允许未知词的embedding进行调整<ol start="2">
+<li>第二轮训练，允许所有embedding调整,继续训练<br>这个idea也可以很好的处理未知词，第一轮的时候，因为固定了word2vec向量，因此模型会尽可能基于word2vec向量的分布来调整自己的参数。但是可能分布差异太大，导致模型参数无论怎么调整，都得不到最好结果。因此第二轮的时候，允许word2vec向量进行适当调整。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>参考论文</p>
+<ol>
+<li>2016-AAAI-Building End-to-End Dialogue Systems Using Generative Hierarchical Neural Network Models</li>
+<li>2014-EMNLP-Convolutional Neural Networks for Sentence Classification</li>
+</ol>
+</li>
+</ul>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/原创/" rel="tag"># 原创</a>
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/05/16/《黑客与画家》读书笔记/" rel="next" title="《黑客与画家》读书笔记">
+                <i class="fa fa-chevron-left"></i> 《黑客与画家》读书笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/01/深度学习训练个人心得/" rel="prev" title="深度学习训练个人心得">
+                深度学习训练个人心得 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -313,6 +444,20 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -543,6 +688,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -560,6 +709,18 @@
       <script id="dsq-count-scr" src="https://freecoder.disqus.com/count.js" async></script>
     
 
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://freecoder.com/2016/08/15/如何使用word2vec训练的向量来辅助模型训练/';
+          this.page.identifier = '2016/08/15/如何使用word2vec训练的向量来辅助模型训练/';
+          this.page.title = '如何使用word2vec训练的向量来辅助模型训练';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://freecoder.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
     
 
   
