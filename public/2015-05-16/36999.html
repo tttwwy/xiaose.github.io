@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="google-site-verification" content="ui224kvj5MUR2gmHnU8Nyu5qbfOSFd_m2EUKDjKhKOk">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="原创,读书笔记,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="这本书是一本非常经典的书，作者是有硅谷创业教父之称的Paul Graham，书中介绍了作者对黑客精神的看法，鼓励我们保持独立思考的精神，同时介绍了创业公司相比传统公司的种种优点，也谈到了自己对设计，对编程语言等的看法。非常具有启发性 为什么书呆子不受欢迎这一章，作者从自己的角度，分析了为什么书呆子不受欢迎。因为相比让自己受欢迎，他们更愿意把精力放到让自己聪明。让自己受欢迎，需要投入大量的精力，只有">
+<meta name="keywords" content="原创,读书笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《黑客与画家》读书笔记">
+<meta property="og:url" content="http://freecoder.com/2015-05-16/36999.html">
+<meta property="og:site_name" content="炼丹实验室">
+<meta property="og:description" content="这本书是一本非常经典的书，作者是有硅谷创业教父之称的Paul Graham，书中介绍了作者对黑客精神的看法，鼓励我们保持独立思考的精神，同时介绍了创业公司相比传统公司的种种优点，也谈到了自己对设计，对编程语言等的看法。非常具有启发性 为什么书呆子不受欢迎这一章，作者从自己的角度，分析了为什么书呆子不受欢迎。因为相比让自己受欢迎，他们更愿意把精力放到让自己聪明。让自己受欢迎，需要投入大量的精力，只有">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-03-02T17:16:30.067Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="《黑客与画家》读书笔记">
+<meta name="twitter:description" content="这本书是一本非常经典的书，作者是有硅谷创业教父之称的Paul Graham，书中介绍了作者对黑客精神的看法，鼓励我们保持独立思考的精神，同时介绍了创业公司相比传统公司的种种优点，也谈到了自己对设计，对编程语言等的看法。非常具有启发性 为什么书呆子不受欢迎这一章，作者从自己的角度，分析了为什么书呆子不受欢迎。因为相比让自己受欢迎，他们更愿意把精力放到让自己聪明。让自己受欢迎，需要投入大量的精力，只有">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://freecoder.com/2015-05-16/36999.html">
+
+
+
+
+
+  <title>《黑客与画家》读书笔记 | 炼丹实验室</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">炼丹实验室</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://freecoder.com/2015-05-16/36999.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="萧瑟">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/panda.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="炼丹实验室">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">《黑客与画家》读书笔记</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-05-16T10:00:00+08:00">
+                2015-05-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2015-05-16/36999.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015-05-16/36999.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这本书是一本非常经典的书，作者是有硅谷创业教父之称的Paul Graham，书中介绍了作者对黑客精神的看法，鼓励我们保持独立思考的精神，同时介绍了创业公司相比传统公司的种种优点，也谈到了自己对设计，对编程语言等的看法。非常具有启发性</p>
+<h2 id="为什么书呆子不受欢迎"><a href="#为什么书呆子不受欢迎" class="headerlink" title="为什么书呆子不受欢迎"></a>为什么书呆子不受欢迎</h2><p>这一章，作者从自己的角度，分析了为什么书呆子不受欢迎。因为相比让自己受欢迎，他们更愿意把精力放到让自己聪明。让自己受欢迎，需要投入大量的精力，只有极少数人能同时分出精力做到这两者。被一群孩子成群结队的欺负，并不是因为做错了什么，只是因为这一伙人需要一起找一件事情做，而欺负书呆子是一个安全的事情。<a id="more"></a></p>
+<h2 id="黑客与画家"><a href="#黑客与画家" class="headerlink" title="黑客与画家"></a>黑客与画家</h2><p>作者指出黑客与画家等创作者很像，而不是科学家，并提出了以下几个观点。</p>
+<ol>
+<li>都是创作者，试图创作出优秀的作品，本质上并不是在做研究。创作者和科学家是不同的。无论是大学的实验室还是大公司，黑客都很难做自己喜欢的事情，去创业公司，也会有很多麻烦事需要应付。有一份活命的白天工作+晚上的自由自在，是一个不错的办法。</li>
+<li>应该通过实践，范例学习编程。</li>
+<li>逐步完成，再慢慢填入细节。避免过度设计。</li>
+<li>考虑心里周期，以根据不同的事情，找出不同的应对方法。把消灭bug这种轻松工作留到最后解决。</li>
+<li>合作开发软件，最好是把项目分割成严格定义的模块，每个模块由一个人明确负责。模块与模块的接口精心设计。</li>
+<li>换位思考，考虑用户的人性需要。判断是否有这个能力的方法就是看怎么向没有技术背景的人解释技术问题。</li>
+</ol>
+<h2 id="不能说的话"><a href="#不能说的话" class="headerlink" title="不能说的话"></a>不能说的话</h2><p>针对所谓“不能说的话”，作者给出了一些方法，来找出哪些话是不能说的。</p>
+<ol>
+<li>部分情况下的真话。</li>
+<li>异端邪说。很多看似叛逆的异端邪说，早就潜伏在思维深处，如果暂时着装自我审查意识，它们就会第一个浮现出来。</li>
+<li>时空差异。通过回顾过去，过去与现在，东方与西方等等不同观点，进行对比。所有年代所有地方都基本禁止的，也许才是真正错误的。如果在大部分时空是不受禁止的，很可能是我们错了。</li>
+<li>道貌岸然。用父母给孩子灌输的假想世界与现实世界做对比，找出不能说的话。</li>
+<li>机制。观察禁忌和道德观念产生的机制。道德禁忌最大的制造者是那些权力斗争中略占上风的一方。他们有实力推行禁忌，同时又软弱到需要禁忌保护自己的利益。<br>训练自己去想那些不能想的，可以获得超出想法本身的好处。对于发现的“不能说的话”，最好别说，至少要挑选合适的场合再说，只打值得打的仗。自由思考比畅所欲言重要。在别人逼你表态的时候，可以说“我还没想好”。对于值得打的仗，攻击具体的东西，容易授人以把柄。可以</li>
+<li>攻击元标签，即抽象描述。</li>
+<li>使用隐喻。<br>我们要永远保持质疑的态度。<h2 id="良好的坏习惯"><a href="#良好的坏习惯" class="headerlink" title="良好的坏习惯"></a>良好的坏习惯</h2>黑客不服从管教，追求自由，并有敏锐的感觉。</li>
+</ol>
+<h2 id="另一条路：创业之路"><a href="#另一条路：创业之路" class="headerlink" title="另一条路：创业之路"></a>另一条路：创业之路</h2><p>作者总结了互联网软件相对于桌面软件的各种优势。</p>
+<ol>
+<li>迭代发布，功能逐渐变化，减少bug的引入，线上环境，bug很快浮出水面，很快修改。</li>
+<li>与用户更紧密的联系。</li>
+<li>即时发布让开发人员全力投入。<br>如何创造财富<br>可能最好的办法，就是自己创业或者加入创业公司了。<br>金钱不等于财富。金钱是财富的一种简便表达，但我们的目标是财富。社会总财富是增加的。要致富，需要两样东西</li>
+<li>可测量性。职位产生的业绩，应该是可测量的。</li>
+<li>可放大性。你的决定能够产生巨大影响。可以用失败的可能性来判断可放大性。没有危险，几乎就没有可放大性。<br>两者必须兼而有之。例如CEO，明星，基金经理，运动员。<br>小团体=可测量性。很难衡量每个人的贡献，但是小团队的贡献，是可测量的。这就是创业公司的真正意义：与更愿意努力工作的人组成一个团队，共同谋取更高的回报。<br>高科技=可放大性。创业公司通过发明新技术盈利。小团队天生就适合解决技术难题。<br>创业也有一些潜规则：</li>
+<li>很多事情由不得你。例如竞争对手决定你到底要多辛苦。</li>
+<li>创业付出与回报总体上成比例，但是个体上不成比例。对个人来说，付出与回报之间存在一个很随机的放大因子。<br>追求保险，可以早期卖掉自己的创业公司。买家更在乎你的用户数量。要时刻牢记最基本的原则：创造人们需要的东西，即财富。</li>
+</ol>
+<h2 id="什么是好设计"><a href="#什么是好设计" class="headerlink" title="什么是好设计"></a>什么是好设计</h2><ol>
+<li>好设计是永不过时的设计。</li>
+<li>好设计是解决主要问题的设计。</li>
+<li>好设计是启发性的设计。</li>
+<li>好设计通常是有点趣味性的设计。</li>
+<li>好设计是艰苦的设计。</li>
+<li>好设计是看似容易的设计。</li>
+<li>好设计是对称的设计。</li>
+<li>好设计是模仿大自然的设计。</li>
+<li>好设计是一种再设计。</li>
+<li>好设计是能够复制的设计。</li>
+<li>好设计常常是奇特的设计。</li>
+<li>好设计是成批出现的。</li>
+<li>好设计常常是大胆的设计。</li>
+</ol>
+<h2 id="编程语言"><a href="#编程语言" class="headerlink" title="编程语言"></a>编程语言</h2><p>作者本人非常推崇LISP语言，这里列一下Lisp语言诞生时候就包含的9种新思想</p>
+<ol>
+<li>条件结构</li>
+<li>函数也是一种数据类型。</li>
+<li>递归。</li>
+<li>变量的动态类型。</li>
+<li>垃圾回收机制。</li>
+<li>程序由表达式组成。</li>
+<li>符号类型。</li>
+<li>代码使用符号和常量组成的树形表示法。</li>
+<li>无论什么时候，整个语言都是可用的。</li>
+</ol>
+<p>作者认为语言要满足下面几个条件，才能让黑客喜欢上</p>
+<ol>
+<li>一种免费的实现</li>
+<li>一本相关书籍</li>
+<li>语言有它所依附的计算机系统。</li>
+<li>简洁</li>
+<li>可编程性：能够帮助自己做到想做的事。</li>
+<li>善于完成黑客想要完成的各种一次性任务。</li>
+<li>函数库。</li>
+<li>效率。</li>
+<li>经受时间考验。</li>
+<li>再设计。<br>作者在这里针对各个接口由不同人负责的情况，除非两个人都同意改变接口，否则接口就无法改变。为了解决这种问题，可以想办法把接口设计成垂直的，而不是水平的。意味着软件内部的模块是一个个垂直堆积起来的抽象层，层与层之间的接口完全由其中一层控制。如果较高一层使用了较低一层定义的语言，那么接口就由较低的一层控制，如果较低一层从属于较高的一层，那么接口就由较高的一层控制。</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/原创/" rel="tag"># 原创</a>
+          
+            <a href="/tags/读书笔记/" rel="tag"># 读书笔记</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016-08-15/18396.html" rel="prev" title="如何使用word2vec训练的向量来辅助模型训练">
+                如何使用word2vec训练的向量来辅助模型训练 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/panda.jpg" alt="萧瑟">
+            
+              <p class="site-author-name" itemprop="name">萧瑟</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/tttwwy" target="_blank" title="Github">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Github</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://zhuanlan.zhihu.com/easyml" target="_blank" title="Zhihu">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Zhihu</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么书呆子不受欢迎"><span class="nav-number">1.</span> <span class="nav-text">为什么书呆子不受欢迎</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#黑客与画家"><span class="nav-number">2.</span> <span class="nav-text">黑客与画家</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不能说的话"><span class="nav-number">3.</span> <span class="nav-text">不能说的话</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#良好的坏习惯"><span class="nav-number">4.</span> <span class="nav-text">良好的坏习惯</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#另一条路：创业之路"><span class="nav-number">5.</span> <span class="nav-text">另一条路：创业之路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是好设计"><span class="nav-number">6.</span> <span class="nav-text">什么是好设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编程语言"><span class="nav-number">7.</span> <span class="nav-text">编程语言</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">萧瑟</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://freecoder.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://freecoder.com/2015-05-16/36999.html';
+          this.page.identifier = '2015-05-16/36999.html';
+          this.page.title = '《黑客与画家》读书笔记';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://freecoder.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

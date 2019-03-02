@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next gemini" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="google-site-verification" content="ui224kvj5MUR2gmHnU8Nyu5qbfOSFd_m2EUKDjKhKOk">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="原创,深度学习,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Theano是最老牌的深度学习库之一。它灵活的特点使其非常适合学术研究和快速实验，但是它难以调试的问题也遭到过无数吐槽。其实Theano本身提供了很多辅助调试的手段，下面就介绍一些Theano的调试技巧，让Theano调试不再难。而关于深度学习的通用调试技巧，请参见我之前的文章：[深度学习调参技巧]。   以下的技巧和代码均在Theano 0.8.2 上测试通过，不保证在更低的版本上也可以适用。">
+<meta name="keywords" content="原创,深度学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Theano调试技巧">
+<meta property="og:url" content="http://freecoder.com/2017-01-11/15149.html">
+<meta property="og:site_name" content="炼丹实验室">
+<meta property="og:description" content="Theano是最老牌的深度学习库之一。它灵活的特点使其非常适合学术研究和快速实验，但是它难以调试的问题也遭到过无数吐槽。其实Theano本身提供了很多辅助调试的手段，下面就介绍一些Theano的调试技巧，让Theano调试不再难。而关于深度学习的通用调试技巧，请参见我之前的文章：[深度学习调参技巧]。   以下的技巧和代码均在Theano 0.8.2 上测试通过，不保证在更低的版本上也可以适用。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-03-02T17:16:30.070Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Theano调试技巧">
+<meta name="twitter:description" content="Theano是最老牌的深度学习库之一。它灵活的特点使其非常适合学术研究和快速实验，但是它难以调试的问题也遭到过无数吐槽。其实Theano本身提供了很多辅助调试的手段，下面就介绍一些Theano的调试技巧，让Theano调试不再难。而关于深度学习的通用调试技巧，请参见我之前的文章：[深度学习调参技巧]。   以下的技巧和代码均在Theano 0.8.2 上测试通过，不保证在更低的版本上也可以适用。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://freecoder.com/2017-01-11/15149.html">
+
+
+
+
+
+  <title>Theano调试技巧 | 炼丹实验室</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">炼丹实验室</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://freecoder.com/2017-01-11/15149.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="萧瑟">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/panda.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="炼丹实验室">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Theano调试技巧</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-11T10:00:00+08:00">
+                2017-01-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017-01-11/15149.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017-01-11/15149.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Theano是最老牌的深度学习库之一。它灵活的特点使其非常适合学术研究和快速实验，但是它难以调试的问题也遭到过无数吐槽。其实Theano本身提供了很多辅助调试的手段，下面就介绍一些Theano的调试技巧，让Theano调试不再难。而关于深度学习的通用调试技巧，请参见我之前的文章：<a href="/2017/01/04/深度学习调参技巧/" title="[深度学习调参技巧]">[深度学习调参技巧]</a>。 </p>
+<blockquote>
+<p>以下的技巧和代码均在Theano 0.8.2 上测试通过，不保证在更低的版本上也可以适用。</p>
+</blockquote>
+<h1 id="如何定位出错位置"><a href="#如何定位出错位置" class="headerlink" title="如何定位出错位置"></a>如何定位出错位置</h1><p>Theano的网络在出错的时候，往往会提供一些出错信息。但是出错信息往往非常模糊，让人难以直接看出具体是哪一行代码出现了问题。大家看下面的例子：<a id="more"></a><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> theano</span><br><span class="line"><span class="keyword">import</span> theano.tensor <span class="keyword">as</span> T</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">x = T.vector()</span><br><span class="line">y = T.vector()</span><br><span class="line">z = x + x</span><br><span class="line">z = z + y</span><br><span class="line">f = theano.function([x, y], z)</span><br><span class="line">f(</span><br><span class="line">np.array([<span class="number">1</span>,<span class="number">2</span>],dtype=theano.config.floatX), np.array([<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>],dtype=theano.config.floatX))</span><br></pre></td></tr></table></figure></p>
+<p>将代码保存到test.py文件中，在命令行中执行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">THEANO_FLAGS=<span class="string">"device=gpu0,floatX=float32"</span> python test.py</span><br></pre></td></tr></table></figure></p>
+<p>输出结果如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"test.py"</span>, line <span class="number">10</span>, <span class="keyword">in</span> &lt;module&gt;    <span class="keyword">print</span> f(np.array([<span class="number">1</span>,<span class="number">2</span>],dtype=<span class="string">'float32'</span>), np.array([<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>],dtype=<span class="string">'float32'</span>))</span><br><span class="line">  File <span class="string">"/home/wangzhe/anaconda2/lib/python2.7/site-packages/theano/compile/function_module.py"</span>, line <span class="number">871</span>, <span class="keyword">in</span> __call__</span><br><span class="line">    storage_map=getattr(self.fn, <span class="string">'storage_map'</span>, <span class="literal">None</span>))  File <span class="string">"/home/wangzhe/anaconda2/lib/python2.7/site-packages/theano/gof/link.py"</span>, line <span class="number">314</span>, <span class="keyword">in</span> raise_with_op    reraise(exc_type, exc_value, exc_trace)</span><br><span class="line">  File <span class="string">"/home/wangzhe/anaconda2/lib/python2.7/site-packages/theano/compile/function_module.py"</span>, line <span class="number">859</span>, <span class="keyword">in</span> __call__</span><br><span class="line">    outputs = self.fn()</span><br><span class="line">ValueError: GpuElemwise. Input dimension mis-match. Input <span class="number">1</span> (indices start at <span class="number">0</span>) has shape[<span class="number">0</span>] == <span class="number">2</span>, but the output size on that axis <span class="keyword">is</span> <span class="number">3.</span></span><br><span class="line">Apply node that caused the error: GpuElemwise&#123;Composite&#123;((i0 + i1) + i0)&#125;&#125;[(<span class="number">0</span>, <span class="number">0</span>)](GpuFromHost<span class="number">.0</span>, GpuFromHost<span class="number">.0</span>)</span><br><span class="line">Toposort index: <span class="number">2</span></span><br><span class="line">Inputs types: [CudaNdarrayType(float32, vector), CudaNdarrayType(float32, vector)]</span><br><span class="line">Inputs shapes: [(<span class="number">3</span>,), (<span class="number">2</span>,)]</span><br><span class="line">Inputs strides: [(<span class="number">1</span>,), (<span class="number">1</span>,)]</span><br><span class="line">Inputs values: [CudaNdarray([ <span class="number">3.</span>  <span class="number">4.</span>  <span class="number">5.</span>]), CudaNdarray([ <span class="number">1.</span>  <span class="number">2.</span>])]</span><br><span class="line">Outputs clients: [[HostFromGpu(GpuElemwise&#123;Composite&#123;((i0 + i1) + i0)&#125;&#125;[(<span class="number">0</span>, <span class="number">0</span>)]<span class="number">.0</span>)]]</span><br><span class="line"></span><br><span class="line">HINT: Re-running <span class="keyword">with</span> most Theano optimization disabled could give you a back-trace of when this node was created. This can be done <span class="keyword">with</span> by setting the Theano flag <span class="string">'optimizer=fast_compile'</span>. If that does <span class="keyword">not</span> work, Theano optimizations can be disabled <span class="keyword">with</span> <span class="string">'optimizer=None'</span>.</span><br><span class="line">HINT: Use the Theano flag <span class="string">'exception_verbosity=high'</span> <span class="keyword">for</span> a debugprint <span class="keyword">and</span> storage map footprint of this apply node.</span><br></pre></td></tr></table></figure></p>
+<p>比较有用的信息是：Input dimension mis-match，但是具体出问题在哪里，仍然让人一头雾水。因为Theano的计算图进行了一些优化，导致出错的时候难以与原始代码对应起来。想解决这个也很简单，就是关闭计算图的优化功能。可以通过THEANO_FLAGS的optimizer,它的默认值是”fast_run”，代表最大程度的优化，我们平时一般就使用这个，但是如果想让调试信息更详细，我们就需要关闭一部分优化:fast_compile或者关闭全部优化：None，这里我们将optimizer设置成”None”，执行如下命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">THEANO_FLAGS=<span class="string">"device=gpu0,floatX=float32,optimizer=None"</span> python test.py</span><br></pre></td></tr></table></figure></p>
+<p>结果如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"test.py"</span>, line <span class="number">10</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    <span class="keyword">print</span> f(np.array([<span class="number">1</span>,<span class="number">2</span>],dtype=<span class="string">'float32'</span>), np.array([<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>],dtype=<span class="string">'float32'</span>))</span><br><span class="line">  File <span class="string">"/home/wangzhe/anaconda2/lib/python2.7/site-packages/theano/compile/function_module.py"</span>, line <span class="number">871</span>, <span class="keyword">in</span> __call__</span><br><span class="line">    storage_map=getattr(self.fn, <span class="string">'storage_map'</span>, <span class="literal">None</span>))</span><br><span class="line">  File <span class="string">"/home/wangzhe/anaconda2/lib/python2.7/site-packages/theano/gof/link.py"</span>, line <span class="number">314</span>, <span class="keyword">in</span> raise_with_op</span><br><span class="line">    reraise(exc_type, exc_value, exc_trace)</span><br><span class="line">  File <span class="string">"/home/wangzhe/anaconda2/lib/python2.7/site-packages/theano/compile/function_module.py"</span>, line <span class="number">859</span>, <span class="keyword">in</span> __call__</span><br><span class="line">    outputs = self.fn()</span><br><span class="line">ValueError: Input dimension mis-match. (input[<span class="number">0</span>].shape[<span class="number">0</span>] = <span class="number">3</span>, input[<span class="number">1</span>].shape[<span class="number">0</span>] = <span class="number">2</span>)</span><br><span class="line">Apply node that caused the error: Elemwise&#123;add,no_inplace&#125;(&lt;TensorType(float32, vector)&gt;, &lt;TensorType(float32, vector)&gt;)</span><br><span class="line">Toposort index: <span class="number">0</span></span><br><span class="line">Inputs types: [TensorType(float32, vector), TensorType(float32, vector)]</span><br><span class="line">Inputs shapes: [(<span class="number">3</span>,), (<span class="number">2</span>,)]</span><br><span class="line">Inputs strides: [(<span class="number">4</span>,), (<span class="number">4</span>,)]</span><br><span class="line">Inputs values: [array([ <span class="number">3.</span>,  <span class="number">4.</span>,  <span class="number">5.</span>], dtype=float32), array([ <span class="number">1.</span>,  <span class="number">2.</span>], dtype=float32)]</span><br><span class="line">Outputs clients: [[Elemwise&#123;add,no_inplace&#125;(Elemwise&#123;add,no_inplace&#125;<span class="number">.0</span>, &lt;TensorType(float32, vector)&gt;)]]</span><br><span class="line"></span><br><span class="line">Backtrace when the node <span class="keyword">is</span> created(use Theano flag traceback.limit=N to make it longer):</span><br><span class="line">  File <span class="string">"test.py"</span>, line <span class="number">7</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    z = y + x</span><br><span class="line"></span><br><span class="line">HINT: Use the Theano flag <span class="string">'exception_verbosity=high'</span> <span class="keyword">for</span> a debugprint <span class="keyword">and</span> storage map footprint of this apply node.</span><br></pre></td></tr></table></figure></p>
+<p>可以看到，这次直接提示出错的位置在代码的第7行：z = y + x，这个是不是方便很多了呢？</p>
+<h1 id="如何打印中间结果"><a href="#如何打印中间结果" class="headerlink" title="如何打印中间结果"></a>如何打印中间结果</h1><p>下面分别介绍Test Values和Print两种方法。</p>
+<h2 id="使用Test-Values"><a href="#使用Test-Values" class="headerlink" title="使用Test Values"></a>使用Test Values</h2><p>我曾见过有人为了保证中间运算的实现没有问题，先用numpy实现了一遍，检查每一步运算结果符合预期以后，再移值改成Theano版的，其实大可不必这么折腾。Theano在0.4.0以后，加入了test values机制，简单来说，就是在计算图编译之前，我们可以给symbolic提供一个具体的值，即test_value，这样Theano就可以将这些数据，代入到symbolic表达式的计算过程中，从而完成计算过程的验证，并可以打印出中间过程的运算结果。<br>大家看下面的例子：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> theano</span><br><span class="line"><span class="keyword">import</span> theano.tensor <span class="keyword">as</span> T</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">x = T.vector()</span><br><span class="line">x.tag.test_value = np.array([<span class="number">1</span>,<span class="number">2</span>],dtype=theano.config.floatX)</span><br><span class="line"></span><br><span class="line">y = T.vector()                                      y.tag.test_value = np.array([<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>],dtype=theano.config.floatX)</span><br><span class="line">z = x + x</span><br><span class="line"><span class="keyword">print</span> z.tag.test_value</span><br><span class="line">z = z + y</span><br><span class="line"><span class="keyword">print</span> z.tag.test_value</span><br><span class="line">f = theano.function([x, y], z)</span><br></pre></td></tr></table></figure></p>
+<p>运行的时候，需要注意，如果需要使用test_value,那么需要设置一下compute_test_value的标记，有以下几种</p>
+<ul>
+<li>off: 关闭，建议在调试没有问题以后，使用off，以提高程序速度。</li>
+<li>ignore: test_value计算出错，不会报错</li>
+<li>warn: test_value计算出错，进行警告</li>
+<li>raise: test_value计算出错，会产出错误</li>
+<li>pdb: test_value计算出错，会进入pdb调试。pdb是python自带的调试工具，在pdb里面可以单步查看各变量的值，甚至执行任意python代码，非常强大，如果想看中间过程，又懒得打太多print，那么可以import pdb<br>然后在你想设断点的地方加上：pdb.set_trace()，后面可以用指令n单步，c继续执行。更详细的介绍可以参考这里：<a href="https://docs.python.org/2/library/pdb.html" target="_blank" rel="noopener">https://docs.python.org/2/library/pdb.html</a></li>
+</ul>
+<p>下面继续回到test_value，我们将test_value值修改成warn，执行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">THEANO_FLAGS=<span class="string">"device=gpu0,floatX=float32,compute_test_value=warn"</span> python test.py</span><br></pre></td></tr></table></figure></p>
+<p>结果如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[ <span class="number">2.</span>  <span class="number">4.</span>]</span><br><span class="line">log_thunk_trace: There was a problem executing an Op.</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"test.py"</span>, line <span class="number">12</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    z = z + y</span><br><span class="line">  File <span class="string">"/home/wangzhe/anaconda2/lib/python2.7/site-packages/theano/tensor/var.py"</span>, line <span class="number">135</span>, <span class="keyword">in</span> __add__</span><br><span class="line">    <span class="keyword">return</span> theano.tensor.basic.add(self, other)</span><br><span class="line">  File <span class="string">"/home/wangzhe/anaconda2/lib/python2.7/site-packages/theano/gof/op.py"</span>, line <span class="number">668</span>, <span class="keyword">in</span> __call__</span><br><span class="line">    required = thunk()</span><br><span class="line">  File <span class="string">"/home/wangzhe/anaconda2/lib/python2.7/site-packages/theano/gof/op.py"</span>, line <span class="number">883</span>, <span class="keyword">in</span> rval</span><br><span class="line">    fill_storage()</span><br><span class="line">  File <span class="string">"/home/wangzhe/anaconda2/lib/python2.7/site-packages/theano/gof/cc.py"</span>, line <span class="number">1707</span>, <span class="keyword">in</span> __call__</span><br><span class="line">    reraise(exc_type, exc_value, exc_trace)</span><br><span class="line">  File <span class="string">"&lt;string&gt;"</span>, line <span class="number">2</span>, <span class="keyword">in</span> reraiseValueError: Input dimension mis-match. (input[<span class="number">0</span>].shape[<span class="number">0</span>] = <span class="number">2</span>, input[<span class="number">1</span>].shape[<span class="number">0</span>] = <span class="number">3</span>)</span><br></pre></td></tr></table></figure></p>
+<p>可以看到，第一个z的值[2,4]被print了出来，同时在test_value的帮助下，错误信息还告诉我们在执行z = z + y 这一行的时候有问题。因此test_value也可以起到，检测哪一行出错的功能。<br><strong>小技巧: </strong>人工一个个构造test_value,实在太麻烦，因此可以考虑在训练开始前，从训练数据中随机选一条，作为test_value,这样还能辅助检测，训练数据有没有问题。</p>
+<h2 id="使用Print"><a href="#使用Print" class="headerlink" title="使用Print"></a>使用Print</h2><p>不过test_value对scan支持的不好，而如果网络包含RNN的话，scan一般是不可或缺的。那么如何打印出scan在循环过程中的中间结果呢？这里我们可以使用<br>theano.printing.Print()，代码如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> theano</span><br><span class="line"><span class="keyword">import</span> theano.tensor <span class="keyword">as</span> T</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">x = T.vector()</span><br><span class="line">y = T.vector()</span><br><span class="line">z = x + x</span><br><span class="line">z = theano.printing.Print(<span class="string">'z1'</span>)(z)</span><br><span class="line">z = z + y</span><br><span class="line">z = theano.printing.Print(<span class="string">'z2'</span>)(z)</span><br><span class="line">f = theano.function([x, y], z)</span><br><span class="line">f(np.array([<span class="number">1</span>,<span class="number">2</span>],dtype=theano.config.floatX),np.array([<span class="number">1</span>,<span class="number">2</span>],dtype=theano.config.floatX))</span><br></pre></td></tr></table></figure></p>
+<p>执行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">THEANO_FLAGS=<span class="string">"device=gpu0,floatX=float32"</span> python test.py</span><br></pre></td></tr></table></figure></p>
+<p>结果如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">z1 __str__ = [ <span class="number">2.</span>  <span class="number">4.</span>]</span><br><span class="line">z2 __str__ = [ <span class="number">3.</span>  <span class="number">6.</span>]</span><br></pre></td></tr></table></figure></p>
+<p>不过下面有几点需要注意一下：</p>
+<ul>
+<li>因为theano是基于计算图的，因此各变量在计算图中被调用执行的顺序，不一定和原代码的顺序一样，因此变量Print出来的顺序也是无法保证的。</li>
+<li>Print方法，会比较严重的拖慢训练的速度，因此最终用于训练的代码，最好把Print去除。</li>
+<li>Print方法会阻止一些计算图的优化，包括一些结果稳定性的优化，因此如果程序出现Nan问题，可以考虑把Print去除，再看看。</li>
+</ul>
+<h1 id="如何处理Nan"><a href="#如何处理Nan" class="headerlink" title="如何处理Nan"></a>如何处理Nan</h1><p>Nan是我们经常遇到的一个问题，我之前的文章：<a href="https://zhuanlan.zhihu.com/p/20792837?refer=easyml" target="_blank" rel="noopener">深度学习网络调试技巧</a> 提到了如何处理Nan问题，其中最重要的步骤，是确定Nan最开始出现的位置。<br>一个比较暴力的方法，是打印出变量的中间结果，看看Nan是从哪里开始的，不过这样工作量有点太大了。所以这里介绍另外一个比较省事的方法：NanGuardMode。NanGuardMode会监测指定的function，是否在计算过程中出现nan,inf。如果出现，会立刻报错，这时配合前面提到的optimizer=None，我们就可以直接定位到，具体是哪一行代码最先出现了Nan问题。代码如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> theano</span><br><span class="line"><span class="keyword">import</span> theano.tensor <span class="keyword">as</span> T</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> theano.compile.nanguardmode <span class="keyword">import</span> NanGuardMode</span><br><span class="line">x = T.matrix()</span><br><span class="line">w = theano.shared(np.random.randn(<span class="number">5</span>, <span class="number">7</span>).astype(theano.config.floatX))</span><br><span class="line">y = T.dot(x, w)</span><br><span class="line">fun = theano.function(</span><br><span class="line">            [x], y,</span><br><span class="line">mode=NanGuardMode(nan_is_error=<span class="literal">True</span>,inf_is_error=<span class="literal">True</span>, big_is_error=<span class="literal">True</span>)</span><br><span class="line">)</span><br><span class="line">infa = np.tile(</span><br><span class="line">            (np.asarray(<span class="number">100.</span>) ** <span class="number">1000000</span>).astype(theano.config.floatX), (<span class="number">3</span>, <span class="number">5</span>))</span><br><span class="line">fun(infa)</span><br></pre></td></tr></table></figure></p>
+<p>执行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">THEANO_FLAGS=<span class="string">"device=gpu0,floatX=float32,optimizer=None"</span> python test.py</span><br></pre></td></tr></table></figure></p>
+<p>结果如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"test.py"</span>, line <span class="number">12</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    f(np.array([<span class="number">1</span>,<span class="number">2</span>],dtype=<span class="string">'float32'</span>),np.array([<span class="number">0</span>,<span class="number">0</span>],dtype=<span class="string">'float32'</span>))</span><br><span class="line">  File <span class="string">"/home/wangzhe/anaconda2/lib/python2.7/site-packages/theano/compile/function_module.py"</span>, line <span class="number">859</span>, <span class="keyword">in</span> __call__</span><br><span class="line">    outputs = self.fn()</span><br><span class="line">Backtrace when the node <span class="keyword">is</span> created(use Theano flag traceback.limit=N to make it longer):</span><br><span class="line">  File <span class="string">"/home/wangzhe/anaconda2/lib/python2.7/site-packages/theano/gof/link.py"</span>, line <span class="number">1014</span>, <span class="keyword">in</span> f</span><br><span class="line">    raise_with_op(node, *thunks)</span><br><span class="line">  File <span class="string">"/home/wangzhe/anaconda2/lib/python2.7/site-packages/theano/gof/link.py"</span>, line <span class="number">314</span>, <span class="keyword">in</span> raise_with_op</span><br><span class="line">    reraise(exc_type, exc_value, exc_trace)</span><br><span class="line">  File <span class="string">"/home/wangzhe/anaconda2/lib/python2.7/site-packages/theano/gof/link.py"</span>, line <span class="number">1012</span>, <span class="keyword">in</span> f</span><br><span class="line">    wrapper(i, node, *thunks)</span><br><span class="line">  File <span class="string">"/home/wangzhe/anaconda2/lib/python2.7/site-packages/theano/compile/nanguardmode.py"</span>, line <span class="number">307</span>, <span class="keyword">in</span> nan_check</span><br><span class="line">  File <span class="string">"/home/wangzhe/anaconda2/lib/python2.7/site-packages/theano/gof/link.py"</span>, line <span class="number">1012</span>, <span class="keyword">in</span> f</span><br><span class="line">    wrapper(i, node, *thunks)</span><br><span class="line">  File <span class="string">"/home/wangzhe/anaconda2/lib/python2.7/site-packages/theano/compile/nanguardmode.py"</span>, line <span class="number">302</span>, <span class="keyword">in</span> nan_check</span><br><span class="line">    do_check_on(x[<span class="number">0</span>], node, fn, <span class="literal">True</span>)</span><br><span class="line">  File <span class="string">"/home/wangzhe/anaconda2/lib/python2.7/site-packages/theano/compile/nanguardmode.py"</span>, line <span class="number">272</span>, <span class="keyword">in</span> do_check_on</span><br><span class="line">    <span class="keyword">raise</span> AssertionError(msg)</span><br><span class="line">AssertionError: Inf detected</span><br><span class="line">Big value detected</span><br><span class="line">NanGuardMode found an error <span class="keyword">in</span> an input of this node.</span><br><span class="line">Node:</span><br><span class="line">dot(&lt;TensorType(float32, matrix)&gt;, HostFromGpu<span class="number">.0</span>)</span><br><span class="line">The input variable that cause problem:</span><br><span class="line">dot [id A] <span class="string">''</span>   </span><br><span class="line"> |&lt;TensorType(float32, matrix)&gt; [id B]</span><br><span class="line"> |HostFromGpu [id C] <span class="string">''</span>   </span><br><span class="line">   |&lt;CudaNdarrayType(float32, matrix)&gt; [id D]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Apply node that caused the error: dot(&lt;TensorType(float32, matrix)&gt;, HostFromGpu<span class="number">.0</span>)</span><br><span class="line">Toposort index: <span class="number">1</span></span><br><span class="line">Inputs types: [TensorType(float32, matrix), TensorType(float32, matrix)]</span><br><span class="line">Inputs shapes: [(<span class="number">3</span>, <span class="number">5</span>), (<span class="number">5</span>, <span class="number">7</span>)]</span><br><span class="line">Inputs strides: [(<span class="number">20</span>, <span class="number">4</span>), (<span class="number">28</span>, <span class="number">4</span>)]</span><br><span class="line">Inputs values: [<span class="string">'not shown'</span>, <span class="string">'not shown'</span>]</span><br><span class="line">Outputs clients: [[<span class="string">'output'</span>]]</span><br><span class="line"></span><br><span class="line">Backtrace when the node <span class="keyword">is</span> created(use Theano flag traceback.limit=N to make it longer):</span><br><span class="line">  File <span class="string">"test.py"</span>, line <span class="number">8</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    y = T.dot(x, w)</span><br><span class="line"></span><br><span class="line">HINT: Use the Theano flag <span class="string">'exception_verbosity=high'</span> <span class="keyword">for</span> a debugprint <span class="keyword">and</span> storage map footprint of this apply node.</span><br></pre></td></tr></table></figure></p>
+<p>可以看到，是y = T.dot(x, w)这一行，产生的Nan.</p>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><p>上面的几个技巧，相信可以解决大部分Theano调试中遇到的问题. 同时我们在用Theano实现一些网络结构，例如LSTM的时候，除了直接参考论文之外，这里强烈推荐参考keras进行实现。keras是一个更顶层的库，同时支持Theano和Tensorflow作为后台，里面大部分模型的实现都很可靠，可以学习和参考。</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
+<li><a href="http://deeplearning.net/software/theano/library/compile/nanguardmode.html#nanguardmode" target="_blank" rel="noopener">http://deeplearning.net/software/theano/library/compile/nanguardmode.html#nanguardmode</a></li>
+<li><a href="http://deeplearning.net/software/theano/tutorial/debug_faq.html" target="_blank" rel="noopener">http://deeplearning.net/software/theano/tutorial/debug_faq.html</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/原创/" rel="tag"># 原创</a>
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017-01-04/53197.html" rel="next" title="深度学习调参技巧">
+                <i class="fa fa-chevron-left"></i> 深度学习调参技巧
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017-01-15/5503.html" rel="prev" title="如何获取最新的深度学习资源">
+                如何获取最新的深度学习资源 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/panda.jpg" alt="萧瑟">
+            
+              <p class="site-author-name" itemprop="name">萧瑟</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/tttwwy" target="_blank" title="Github">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Github</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://zhuanlan.zhihu.com/easyml" target="_blank" title="Zhihu">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Zhihu</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#如何定位出错位置"><span class="nav-number">1.</span> <span class="nav-text">如何定位出错位置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何打印中间结果"><span class="nav-number">2.</span> <span class="nav-text">如何打印中间结果</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用Test-Values"><span class="nav-number">2.1.</span> <span class="nav-text">使用Test Values</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用Print"><span class="nav-number">2.2.</span> <span class="nav-text">使用Print</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何处理Nan"><span class="nav-number">3.</span> <span class="nav-text">如何处理Nan</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其他"><span class="nav-number">4.</span> <span class="nav-text">其他</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">萧瑟</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://freecoder.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://freecoder.com/2017-01-11/15149.html';
+          this.page.identifier = '2017-01-11/15149.html';
+          this.page.title = 'Theano调试技巧';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://freecoder.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
