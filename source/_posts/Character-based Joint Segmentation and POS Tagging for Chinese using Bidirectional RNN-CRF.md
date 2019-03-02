@@ -12,15 +12,13 @@ date: 2017-04-06 10:00:00
 # [Character-based Joint Segmentation and POS Tagging for Chinese using Bidirectional RNN-CRF](https://arxiv.org/pdf/1704.01314.pdf)
 ## 作者
 Yan Shao and Christian Hardmeier and Jorg Tiedemann  and Joakim Nivre
-## 单位
-Department of Linguistics and Philology, Uppsala University
-Department of Modern Languages, University of Helsinki
+
 ## 关键词
-Bi-RNN-CRF，分词，词性标注，汉字embedding
+Bi-RNN-CRF，分词，词性标注，汉字embedding<!-- more -->
 ## 文章来源
 https://arxiv.org/pdf/1704.01314.pdf
 ## 问题
-如何联合做中文分词和词性标注。<!-- more -->
+如何联合做中文分词和词性标注。
 ## 模型
 ![](/images/15515449304888.jpg)
 
