@@ -66,7 +66,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="深度学习,原创,">
 
 
 
@@ -78,14 +78,14 @@
 
 
 <meta name="description" content="之前曾经写过一篇文章，讲了一些深度学习训练的技巧，其中包含了部分调参心得：深度学习训练心得。不过由于一般深度学习实验，相比普通机器学习任务，时间较长，因此调参技巧就显得尤为重要。同时个人实践中，又有一些新的调参心得，因此这里单独写一篇文章，谈一下自己对深度学习调参的理解，大家如果有其他技巧，也欢迎多多交流。 好的实验环境是成功的一半由于深度学习实验超参众多，代码风格良好的实验环境，可以让你的人工或">
-<meta name="keywords" content="深度学习,推荐系统,NLP">
+<meta name="keywords" content="深度学习,原创">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深度学习调参技巧">
 <meta property="og:url" content="http://freecoder.com/2019/03/02/深度学习调参技巧/index.html">
 <meta property="og:site_name" content="炼丹实验室">
 <meta property="og:description" content="之前曾经写过一篇文章，讲了一些深度学习训练的技巧，其中包含了部分调参心得：深度学习训练心得。不过由于一般深度学习实验，相比普通机器学习任务，时间较长，因此调参技巧就显得尤为重要。同时个人实践中，又有一些新的调参心得，因此这里单独写一篇文章，谈一下自己对深度学习调参的理解，大家如果有其他技巧，也欢迎多多交流。 好的实验环境是成功的一半由于深度学习实验超参众多，代码风格良好的实验环境，可以让你的人工或">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-02T15:25:04.274Z">
+<meta property="og:updated_time" content="2019-03-02T16:38:24.133Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深度学习调参技巧">
 <meta name="twitter:description" content="之前曾经写过一篇文章，讲了一些深度学习训练的技巧，其中包含了部分调参心得：深度学习训练心得。不过由于一般深度学习实验，相比普通机器学习任务，时间较长，因此调参技巧就显得尤为重要。同时个人实践中，又有一些新的调参心得，因此这里单独写一篇文章，谈一下自己对深度学习调参的理解，大家如果有其他技巧，也欢迎多多交流。 好的实验环境是成功的一半由于深度学习实验超参众多，代码风格良好的实验环境，可以让你的人工或">
@@ -274,6 +274,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/03/02/深度学习调参技巧/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/02/深度学习调参技巧/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -305,6 +315,7 @@
 <li>可以输出模型的损失函数值以及训练集和验证集上的准确率。</li>
 <li>可以考虑设计一个子程序，可以根据给定的参数，启动训练并监控和周期性保存评估结果。再由一个主程序，分配参数以及并行启动一系列子程序。</li>
 </ul>
+<a id="more"></a>
 <h1 id="画图"><a href="#画图" class="headerlink" title="画图"></a>画图</h1><p>画图是一个很好的习惯，一般是训练数据遍历一轮以后，就输出一下训练集和验证集准确率。同时画到一张图上。这样训练一段时间以后，如果模型一直没有收敛，那么就可以停止训练，尝试其他参数了，以节省时间。<br>如果训练到最后，训练集，测试集准确率都很低，那么说明模型有可能欠拟合。那么后续调节参数方向，就是增强模型的拟合能力。例如增加网络层数，增加节点数，减少dropout值，减少L2正则值等等。<br>如果训练集准确率较高，测试集准确率比较低，那么模型有可能过拟合，这个时候就需要向提高模型泛化能力的方向，调节参数。</p>
 <h1 id="从粗到细分阶段调参"><a href="#从粗到细分阶段调参" class="headerlink" title="从粗到细分阶段调参"></a>从粗到细分阶段调参</h1><p>实践中，一般先进行初步范围搜索，然后根据好结果出现的地方，再缩小范围进行更精细的搜索。</p>
 <ol>
@@ -361,6 +372,14 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+          
+            <a href="/tags/原创/" rel="tag"># 原创</a>
+          
+        </div>
+      
 
       
       
@@ -412,6 +431,16 @@
           
 
   
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
 
 
 
@@ -461,7 +490,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -469,6 +498,15 @@
 
             
 
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
             
 
           </nav>
@@ -677,14 +715,30 @@
 
   
 
+    
+      <script id="dsq-count-scr" src="https://freecoder.disqus.com/count.js" async></script>
+    
 
-
-
-
-
-
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://freecoder.com/2019/03/02/深度学习调参技巧/';
+          this.page.identifier = '2019/03/02/深度学习调参技巧/';
+          this.page.title = '深度学习调参技巧';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://freecoder.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
 
   
+
+
+
+
+
 
 
 

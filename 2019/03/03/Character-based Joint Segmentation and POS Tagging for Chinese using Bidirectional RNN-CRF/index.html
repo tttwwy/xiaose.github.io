@@ -66,7 +66,7 @@
 
 
 
-  <meta name="keywords" content="深度学习,原创,">
+  <meta name="keywords" content="深度学习,原创,NLP,">
 
 
 
@@ -77,18 +77,20 @@
 
 
 
-<meta name="description" content="参数初始化。下面几种方式,随便选一个,结果基本都差不多。但是一定要做。否则可能会减慢收敛速度，影响收敛结果，甚至造成Nan等一系列问题。n_in为网络的输入大小，n_out为网络的输出大小，n为n_in或(n_in+n_out)*0.5Xavier初始法论文：http://jmlr.org/proceedings/papers/v9/glorot10a/glorot10a.pdfHe初始化论文：h">
-<meta name="keywords" content="深度学习,原创">
+<meta name="description" content="Character-based Joint Segmentation and POS Tagging for Chinese using Bidirectional RNN-CRF作者Yan Shao and Christian Hardmeier and Jorg Tiedemann  and Joakim Nivre 单位Department of Linguistics and Philol">
+<meta name="keywords" content="深度学习,原创,NLP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="深度学习训练个人心得">
-<meta property="og:url" content="http://freecoder.com/2019/03/02/深度学习训练个人心得/index.html">
+<meta property="og:title" content="Character-based Joint Segmentation and POS Tagging for Chinese using Bidirectional RNN-CRF">
+<meta property="og:url" content="http://freecoder.com/2019/03/03/Character-based Joint Segmentation and POS Tagging for Chinese using Bidirectional RNN-CRF/index.html">
 <meta property="og:site_name" content="炼丹实验室">
-<meta property="og:description" content="参数初始化。下面几种方式,随便选一个,结果基本都差不多。但是一定要做。否则可能会减慢收敛速度，影响收敛结果，甚至造成Nan等一系列问题。n_in为网络的输入大小，n_out为网络的输出大小，n为n_in或(n_in+n_out)*0.5Xavier初始法论文：http://jmlr.org/proceedings/papers/v9/glorot10a/glorot10a.pdfHe初始化论文：h">
+<meta property="og:description" content="Character-based Joint Segmentation and POS Tagging for Chinese using Bidirectional RNN-CRF作者Yan Shao and Christian Hardmeier and Jorg Tiedemann  and Joakim Nivre 单位Department of Linguistics and Philol">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-02T16:38:24.141Z">
+<meta property="og:image" content="http://freecoder.com/images/15515449304888.jpg">
+<meta property="og:updated_time" content="2019-03-02T16:46:44.726Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="深度学习训练个人心得">
-<meta name="twitter:description" content="参数初始化。下面几种方式,随便选一个,结果基本都差不多。但是一定要做。否则可能会减慢收敛速度，影响收敛结果，甚至造成Nan等一系列问题。n_in为网络的输入大小，n_out为网络的输出大小，n为n_in或(n_in+n_out)*0.5Xavier初始法论文：http://jmlr.org/proceedings/papers/v9/glorot10a/glorot10a.pdfHe初始化论文：h">
+<meta name="twitter:title" content="Character-based Joint Segmentation and POS Tagging for Chinese using Bidirectional RNN-CRF">
+<meta name="twitter:description" content="Character-based Joint Segmentation and POS Tagging for Chinese using Bidirectional RNN-CRF作者Yan Shao and Christian Hardmeier and Jorg Tiedemann  and Joakim Nivre 单位Department of Linguistics and Philol">
+<meta name="twitter:image" content="http://freecoder.com/images/15515449304888.jpg">
 
 
 
@@ -118,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://freecoder.com/2019/03/02/深度学习训练个人心得/">
+  <link rel="canonical" href="http://freecoder.com/2019/03/03/Character-based Joint Segmentation and POS Tagging for Chinese using Bidirectional RNN-CRF/">
 
 
 
 
 
-  <title>深度学习训练个人心得 | 炼丹实验室</title>
+  <title>Character-based Joint Segmentation and POS Tagging for Chinese using Bidirectional RNN-CRF | 炼丹实验室</title>
   
 
 
@@ -231,7 +233,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://freecoder.com/2019/03/02/深度学习训练个人心得/">
+    <link itemprop="mainEntityOfPage" href="http://freecoder.com/2019/03/03/Character-based Joint Segmentation and POS Tagging for Chinese using Bidirectional RNN-CRF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="萧瑟">
@@ -248,7 +250,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">深度学习训练个人心得</h1>
+          <h1 class="post-title" itemprop="name headline">Character-based Joint Segmentation and POS Tagging for Chinese using Bidirectional RNN-CRF</h1>
         
 
         <div class="post-meta">
@@ -260,8 +262,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-02T23:32:58+08:00">
-                2019-03-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-03T00:40:07+08:00">
+                2019-03-03
               </time>
             
 
@@ -279,8 +281,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/03/02/深度学习训练个人心得/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/02/深度学习训练个人心得/" itemprop="commentCount"></span>
+                <a href="/2019/03/03/Character-based Joint Segmentation and POS Tagging for Chinese using Bidirectional RNN-CRF/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/03/Character-based Joint Segmentation and POS Tagging for Chinese using Bidirectional RNN-CRF/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -308,49 +310,22 @@
       
 
       
-        <h1 id="参数初始化。"><a href="#参数初始化。" class="headerlink" title="参数初始化。"></a>参数初始化。</h1><p>下面几种方式,随便选一个,结果基本都差不多。但是一定要做。否则可能会减慢收敛速度，影响收敛结果，甚至造成Nan等一系列问题。<br>n_in为网络的输入大小，n_out为网络的输出大小，n为n_in或(n_in+n_out)*0.5<br>Xavier初始法论文：<a href="http://jmlr.org/proceedings/papers/v9/glorot10a/glorot10a.pdf" target="_blank" rel="noopener">http://jmlr.org/proceedings/papers/v9/glorot10a/glorot10a.pdf</a><br>He初始化论文：<a href="https://arxiv.org/abs/1502.01852" target="_blank" rel="noopener">https://arxiv.org/abs/1502.01852</a></p>
+        <h1 id="Character-based-Joint-Segmentation-and-POS-Tagging-for-Chinese-using-Bidirectional-RNN-CRF"><a href="#Character-based-Joint-Segmentation-and-POS-Tagging-for-Chinese-using-Bidirectional-RNN-CRF" class="headerlink" title="Character-based Joint Segmentation and POS Tagging for Chinese using Bidirectional RNN-CRF"></a><a href="https://arxiv.org/pdf/1704.01314.pdf" target="_blank" rel="noopener">Character-based Joint Segmentation and POS Tagging for Chinese using Bidirectional RNN-CRF</a></h1><h2 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h2><p>Yan Shao and Christian Hardmeier and Jorg Tiedemann  and Joakim Nivre</p>
+<h2 id="单位"><a href="#单位" class="headerlink" title="单位"></a>单位</h2><p>Department of Linguistics and Philology, Uppsala University<br>Department of Modern Languages, University of Helsinki</p>
+<h2 id="关键词"><a href="#关键词" class="headerlink" title="关键词"></a>关键词</h2><p>Bi-RNN-CRF，分词，词性标注，汉字embedding</p>
+<h2 id="文章来源"><a href="#文章来源" class="headerlink" title="文章来源"></a>文章来源</h2><p><a href="https://arxiv.org/pdf/1704.01314.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1704.01314.pdf</a></p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>如何联合做中文分词和词性标注。<a id="more"></a></p>
+<h2 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h2><p><img src="/images/15515449304888.jpg" alt></p>
+<p>这篇论文首先将双向GRU+CRF这种非常流行的序列标注模型应用到了分词和词性标注任务上。使用了联合训练的方式，即将分词的标签和词性标注的标签拼在一起，同时输出。例如<strong>夏天太热</strong>这个句子，分词的标签输出是B E S S，词性标注的标签输出是NT NT AD VA,那么联合的标签输出就是B-NT E-NT S-AD S-VA。</p>
+<p>同时，这篇论文使用了三种汉字embedding方式</p>
 <ul>
-<li><p>uniform均匀分布初始化：<br>  w = np.random.uniform(low=-scale, high=scale, size=[n_in,n_out])</p>
-<ul>
-<li>Xavier初始法，适用于普通激活函数(tanh,sigmoid)：scale = np.sqrt(3/n)</li>
-<li>He初始化，适用于ReLU：scale = np.sqrt(6/n)</li>
+<li>Concatenated N-gram：即使用包含这个字的n-gram词，来作为这个字的embedding,这样相比双向GRU的方式，可以更直接的考虑局部信息</li>
+<li>Radicals and Orthographical Features：首先使用了部首信息，作为embedding，其次将汉字作为图像送给CNN，获取字的embedding</li>
+<li>公开语料预训练好的字embedding</li>
 </ul>
-</li>
-<li><p>normal高斯分布初始化：<br>  w = np.random.randn(n_in,n_out) * stdev # stdev为高斯分布的标准差，均值设为0</p>
-<ul>
-<li>Xavier初始法，适用于普通激活函数 (tanh,sigmoid)：stdev = np.sqrt(n)</li>
-<li>He初始化，适用于ReLU：stdev = np.sqrt(2/n)</li>
-</ul>
-</li>
-<li><p>svd初始化：对RNN有比较好的效果。参考论文：<a href="https://arxiv.org/abs/1312.6120" target="_blank" rel="noopener">https://arxiv.org/abs/1312.6120</a></p>
-</li>
-</ul>
-<a id="more"></a>
-<h1 id="数据预处理方式"><a href="#数据预处理方式" class="headerlink" title="数据预处理方式"></a>数据预处理方式</h1><ul>
-<li>zero-center ,这个挺常用的.<br>X -= np.mean(X, axis = 0) # zero-center<br>X /= np.std(X, axis = 0) # normalize</li>
-<li>PCA whitening,这个用的比较少.</li>
-</ul>
-<h1 id="训练技巧"><a href="#训练技巧" class="headerlink" title="训练技巧"></a>训练技巧</h1><ul>
-<li>要做梯度归一化,即算出来的梯度除以minibatch size</li>
-<li>clip c(梯度裁剪): 限制最大梯度,其实是value = sqrt(w1^2+w2^2….),如果value超过了阈值,就算一个衰减系系数,让value的值等于阈值: 5,10,15</li>
-<li>dropout对小数据防止过拟合有很好的效果,值一般设为0.5,小数据上dropout+sgd在我的大部分实验中，效果提升都非常明显.因此可能的话，建议一定要尝试一下。 dropout的位置比较有讲究, 对于RNN,建议放到输入-&gt;RNN与RNN-&gt;输出的位置.关于RNN如何用dropout,可以参考这篇论文:<a href="http://arxiv.org/abs/1409.2329" target="_blank" rel="noopener">http://arxiv.org/abs/1409.2329</a></li>
-<li>adam,adadelta等,在小数据上,我这里实验的效果不如sgd, sgd收敛速度会慢一些，但是最终收敛后的结果，一般都比较好。如果使用sgd的话,可以选择从1.0或者0.1的学习率开始,隔一段时间,在验证集上检查一下,如果cost没有下降,就对学习率减半. 我看过很多论文都这么搞,我自己实验的结果也很好. 当然,也可以先用ada系列先跑,最后快收敛的时候,更换成sgd继续训练.同样也会有提升.据说adadelta一般在分类问题上效果比较好，adam在生成问题上效果比较好。</li>
-<li>除了gate之类的地方,需要把输出限制成0-1之外,尽量不要用sigmoid,可以用tanh或者relu之类的激活函数.1. sigmoid函数在-4到4的区间里，才有较大的梯度。之外的区间，梯度接近0，很容易造成梯度消失问题。2. 输入0均值，sigmoid函数的输出不是0均值的。</li>
-<li>rnn的dim和embdding size,一般从128上下开始调整. batch size,一般从128左右开始调整.batch size合适最重要,并不是越大越好.</li>
-<li>word2vec初始化,在小数据上,不仅可以有效提高收敛速度,也可以可以提高结果.</li>
-<li>尽量对数据做shuffle</li>
-<li>LSTM 的forget gate的bias,用1.0或者更大的值做初始化,可以取得更好的结果,来自这篇论文:<a href="http://jmlr.org/proceedings/papers/v37/jozefowicz15.pdf" target="_blank" rel="noopener">http://jmlr.org/proceedings/papers/v37/jozefowicz15.pdf</a>, 我这里实验设成1.0,可以提高收敛速度.实际使用中,不同的任务,可能需要尝试不同的值.</li>
-<li>Batch Normalization据说可以提升效果，不过我没有尝试过，建议作为最后提升模型的手段，参考论文：Accelerating Deep Network Training by Reducing Internal Covariate Shift</li>
-<li>如果你的模型包含全连接层（MLP），并且输入和输出大小一样，可以考虑将MLP替换成Highway Network,我尝试对结果有一点提升，建议作为最后提升模型的手段，原理很简单，就是给输出加了一个gate来控制信息的流动，详细介绍请参考论文: <a href="http://arxiv.org/abs/1505.00387" target="_blank" rel="noopener">http://arxiv.org/abs/1505.00387</a></li>
-<li>来自@张馨宇的技巧：一轮加正则，一轮不加正则，反复进行。</li>
-</ul>
-<h1 id="Ensemble"><a href="#Ensemble" class="headerlink" title="Ensemble"></a>Ensemble</h1><p>Ensemble是论文刷结果的终极核武器,深度学习中一般有以下几种方式</p>
-<ul>
-<li>同样的参数,不同的初始化方式</li>
-<li>不同的参数,通过cross-validation,选取最好的几组</li>
-<li>同样的参数,模型训练的不同阶段，即不同迭代次数的模型。</li>
-<li>不同的模型,进行线性融合. 例如RNN和传统模型.</li>
-</ul>
+<p>论文decoding阶段，使用了ensemble方法，把4个不同初始化方式的模型取平均，进行decoding</p>
+<h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><p>代码：<a href="https://github.com/yanshao9798/tagger" title="https://github.com/yanshao9798/tagger" target="_blank" rel="noopener">https://github.com/yanshao9798/tagger</a></p>
+<h2 id="简评"><a href="#简评" class="headerlink" title="简评"></a>简评</h2><p>这篇文章将分词和词性标注进行联合，避免了两个任务间的错误传递问题。同时针对汉字特有的特点，探索了基于部首和汉字图像的embedding方式，对其他中文处理任务也有一定的启发。</p>
 
       
     </div>
@@ -372,6 +347,8 @@
           
             <a href="/tags/原创/" rel="tag"># 原创</a>
           
+            <a href="/tags/NLP/" rel="tag"># NLP</a>
+          
         </div>
       
 
@@ -383,8 +360,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/02/深度学习调参技巧/" rel="next" title="深度学习调参技巧">
-                <i class="fa fa-chevron-left"></i> 深度学习调参技巧
+              <a href="/2019/03/03/《黑客与画家》读书笔记/" rel="next" title="《黑客与画家》读书笔记">
+                <i class="fa fa-chevron-left"></i> 《黑客与画家》读书笔记
               </a>
             
           </div>
@@ -393,8 +370,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/03/03/Theano调试技巧/" rel="prev" title="Theano调试技巧">
-                Theano调试技巧 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/03/03/当AI邂逅艺术：机器写诗综述/" rel="prev" title="当AI邂逅艺术：机器写诗综述">
+                当AI邂逅艺术：机器写诗综述 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -546,7 +523,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#参数初始化。"><span class="nav-number">1.</span> <span class="nav-text">参数初始化。</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据预处理方式"><span class="nav-number">2.</span> <span class="nav-text">数据预处理方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#训练技巧"><span class="nav-number">3.</span> <span class="nav-text">训练技巧</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Ensemble"><span class="nav-number">4.</span> <span class="nav-text">Ensemble</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Character-based-Joint-Segmentation-and-POS-Tagging-for-Chinese-using-Bidirectional-RNN-CRF"><span class="nav-number">1.</span> <span class="nav-text">Character-based Joint Segmentation and POS Tagging for Chinese using Bidirectional RNN-CRF</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#作者"><span class="nav-number">1.1.</span> <span class="nav-text">作者</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单位"><span class="nav-number">1.2.</span> <span class="nav-text">单位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关键词"><span class="nav-number">1.3.</span> <span class="nav-text">关键词</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文章来源"><span class="nav-number">1.4.</span> <span class="nav-text">文章来源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题"><span class="nav-number">1.5.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模型"><span class="nav-number">1.6.</span> <span class="nav-text">模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#资源"><span class="nav-number">1.7.</span> <span class="nav-text">资源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简评"><span class="nav-number">1.8.</span> <span class="nav-text">简评</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -716,9 +693,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://freecoder.com/2019/03/02/深度学习训练个人心得/';
-          this.page.identifier = '2019/03/02/深度学习训练个人心得/';
-          this.page.title = '深度学习训练个人心得';
+          this.page.url = 'http://freecoder.com/2019/03/03/Character-based Joint Segmentation and POS Tagging for Chinese using Bidirectional RNN-CRF/';
+          this.page.identifier = '2019/03/03/Character-based Joint Segmentation and POS Tagging for Chinese using Bidirectional RNN-CRF/';
+          this.page.title = 'Character-based Joint Segmentation and POS Tagging for Chinese using Bidirectional RNN-CRF';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://freecoder.disqus.com/embed.js';
