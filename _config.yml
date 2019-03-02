@@ -5,9 +5,9 @@
 # Site
 title: 炼丹实验室
 subtitle:
-description:
-keywords:
-author: xiaose
+description: 分享个人技术心得
+keywords: 深度学习,推荐系统,NLP
+author: 萧瑟
 language: zh-Hans
 timezone:
 
@@ -15,7 +15,8 @@ timezone:
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: http://freecoder.com
 root: /
-permalink: :year/:month/:day/:title/
+#permalink: :year/:month/:day/:title/
+permalink: :year-:month-:day/:abbrlink.html
 permalink_defaults:
 
 # Directory
@@ -81,3 +82,30 @@ deploy:
   type: git
   repo: git@github.com:tttwwy/xiaose.github.io.git
   branch: master
+
+disqus_shortname: freecoder
+
+social:
+    Github: https://github.com/tttwwy
+    Zhihu: https://zhuanlan.zhihu.com/easyml
+social_icons:
+    enable: true
+    GitHub: github
+    
+scheme: Pisces 
+
+search:
+    path: search.xml
+    field: post
+    format: html
+    limit: 10000
+
+sitemap:
+    path: sitemap.xml
+
+baidusitemap:
+    path: baidusitemap.xml
+
+abbrlink:
+    alg: crc16
+    rep: dec
