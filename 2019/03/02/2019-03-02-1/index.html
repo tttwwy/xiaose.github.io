@@ -79,13 +79,17 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="炼丹实验室">
-<meta property="og:url" content="http://freecoder.com/index.html">
+<meta name="description" content="之前曾经写过一篇文章，讲了一些深度学习训练的技巧，其中包含了部分调参心得：深度学习训练心得。不过由于一般深度学习实验，相比普通机器学习任务，时间较长，因此调参技巧就显得尤为重要。同时个人实践中，又有一些新的调参心得，因此这里单独写一篇文章，谈一下自己对深度学习调参的理解，大家如果有其他技巧，也欢迎多多交流。 好的实验环境是成功的一半由于深度学习实验超参众多，代码风格良好的实验环境，可以让你的人工或">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深度学习调参技巧">
+<meta property="og:url" content="http://freecoder.com/2019/03/02/2019-03-02-1/index.html">
 <meta property="og:site_name" content="炼丹实验室">
+<meta property="og:description" content="之前曾经写过一篇文章，讲了一些深度学习训练的技巧，其中包含了部分调参心得：深度学习训练心得。不过由于一般深度学习实验，相比普通机器学习任务，时间较长，因此调参技巧就显得尤为重要。同时个人实践中，又有一些新的调参心得，因此这里单独写一篇文章，谈一下自己对深度学习调参的理解，大家如果有其他技巧，也欢迎多多交流。 好的实验环境是成功的一半由于深度学习实验超参众多，代码风格良好的实验环境，可以让你的人工或">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-03-02T15:17:14.432Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="炼丹实验室">
+<meta name="twitter:title" content="深度学习调参技巧">
+<meta name="twitter:description" content="之前曾经写过一篇文章，讲了一些深度学习训练的技巧，其中包含了部分调参心得：深度学习训练心得。不过由于一般深度学习实验，相比普通机器学习任务，时间较长，因此调参技巧就显得尤为重要。同时个人实践中，又有一些新的调参心得，因此这里单独写一篇文章，谈一下自己对深度学习调参的理解，大家如果有其他技巧，也欢迎多多交流。 好的实验环境是成功的一半由于深度学习实验超参众多，代码风格良好的实验环境，可以让你的人工或">
 
 
 
@@ -115,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://freecoder.com/">
+  <link rel="canonical" href="http://freecoder.com/2019/03/02/2019-03-02-1/">
 
 
 
 
 
-  <title>炼丹实验室</title>
+  <title>深度学习调参技巧 | 炼丹实验室</title>
   
 
 
@@ -140,8 +144,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -214,9 +217,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -246,9 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/03/02/2019-03-02-1/" itemprop="url">深度学习调参技巧</a></h1>
+          <h1 class="post-title" itemprop="name headline">深度学习调参技巧</h1>
         
 
         <div class="post-meta">
@@ -298,9 +299,7 @@
       
 
       
-        
-          
-            <p>之前曾经写过一篇文章，讲了一些深度学习训练的技巧，其中包含了部分调参心得：<a href="https://zhuanlan.zhihu.com/p/20767428" target="_blank" rel="noopener">深度学习训练心得</a>。不过由于一般深度学习实验，相比普通机器学习任务，时间较长，因此调参技巧就显得尤为重要。同时个人实践中，又有一些新的调参心得，因此这里单独写一篇文章，谈一下自己对深度学习调参的理解，大家如果有其他技巧，也欢迎多多交流。</p>
+        <p>之前曾经写过一篇文章，讲了一些深度学习训练的技巧，其中包含了部分调参心得：<a href="https://zhuanlan.zhihu.com/p/20767428" target="_blank" rel="noopener">深度学习训练心得</a>。不过由于一般深度学习实验，相比普通机器学习任务，时间较长，因此调参技巧就显得尤为重要。同时个人实践中，又有一些新的调参心得，因此这里单独写一篇文章，谈一下自己对深度学习调参的理解，大家如果有其他技巧，也欢迎多多交流。</p>
 <h1 id="好的实验环境是成功的一半"><a href="#好的实验环境是成功的一半" class="headerlink" title="好的实验环境是成功的一半"></a>好的实验环境是成功的一半</h1><p>由于深度学习实验超参众多，代码风格良好的实验环境，可以让你的人工或者自动调参更加省力，有以下几点可能需要注意：</p>
 <ul>
 <li>将各个参数的设置部分集中在一起。如果参数的设置分布在代码的各个地方，那么修改的过程想必会非常痛苦。</li>
@@ -349,8 +348,6 @@
 </ul>
 <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>这里列了一些参数资料，大家有时间，可以进一步阅读。<br><a href="https://arxiv.org/abs/1206.5533" target="_blank" rel="noopener">Practical recommendations for gradient-based training of deep architectures by Yoshua Bengio (2012)</a><br><a href="http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf" target="_blank" rel="noopener">Efficient BackProp, by Yann LeCun, Léon Bottou, Genevieve Orr and Klaus-Robert Müller</a><br><a href="http://www.springer.com/computer/theoretical+computer+science/book/978-3-642-35288-1" target="_blank" rel="noopener">Neural Networks: Tricks of the Trade, edited by Grégoire Montavon, Geneviève Orr, and Klaus-Robert Müller.</a></p>
 
-          
-        
       
     </div>
     
@@ -367,182 +364,28 @@
       
 
       
-
-      
-
       
       
-        <div class="post-eof"></div>
+
       
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://freecoder.com/2019/03/02/2019-03-02/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="xiaose">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="炼丹实验室">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/03/02/2019-03-02/" itemprop="url">如何获取最新的深度学习资源</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-02T23:13:37+08:00">
-                2019-03-02
-              </time>
+              <a href="/2019/03/02/2019-03-02/" rel="next" title="如何获取最新的深度学习资源">
+                <i class="fa fa-chevron-left"></i> 如何获取最新的深度学习资源
+              </a>
             
+          </div>
 
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <p>很多刚入门深度学习的朋友，往往不知道该如何获取最新的深度学习资源，包括资讯，论文，学习资料等等，有问题也不知道该与谁交流。因此这里分享一些相关途径，希望对大家的学习有所帮助。</p>
-<h1 id="微信公众号"><a href="#微信公众号" class="headerlink" title="微信公众号"></a>微信公众号</h1><p>有很多和深度学习相关的公众号，对学术相关进展的跟进都很及时，可以考虑有选择的关注：</p>
-<ul>
-<li>机器之心</li>
-<li>智能立方:</li>
-<li>paperweekly</li>
-<li>哈工大scir</li>
-<li>将门创投</li>
-<li>炼丹实验室</li>
-<li>机器学习研究会</li>
-<li>AI科技评论</li>
-<li>全球人工智能</li>
-<li>深度学习大讲堂</li>
-</ul>
-<h1 id="邮箱订阅"><a href="#邮箱订阅" class="headerlink" title="邮箱订阅"></a>邮箱订阅</h1><p>通过邮箱，订阅一些资源的推送，是很有必要的：</p>
-<ul>
-<li>Arxiv：计算机领域，特别是深度学习领域的最新论文，一般都会先出现在Arxiv上，除了天天到Arxiv相关类别刷论文之外，也可以通过邮箱订阅自己感兴趣的类别：<a href="https://arxiv.org/help/subscribe" target="_blank" rel="noopener">https://arxiv.org/help/subscribe</a></li>
-<li>好东西传送门：包含机器学习日报，NLP日报，大数据日报，Python日报等很实用的内容，建议订阅：<a href="http://memect.com/" target="_blank" rel="noopener">http://memect.com/</a></li>
-<li>大牛的最新Paper：可以通过Google学术，订阅一些深度学习领域大牛的论文，这样一旦他们有新论文，有可以通过邮件及时得到通知,下面是我的一些订阅，不全，仅供参考：<ul>
-<li>Geoffrey Hinton</li>
-<li>Yann LeCun</li>
-<li>Yoshua Bengio</li>
-<li>Andrej Karpathy</li>
-<li>andrew Y ng</li>
-<li>Richard Socher</li>
-<li>Tomas Mikolov</li>
-<li>Oriol Vinyals</li>
-<li>Percy Liang</li>
-<li>Jason Weston</li>
-<li>Hang Li</li>
-<li>Tie-Yan Liu</li>
-</ul>
-</li>
-</ul>
-<h1 id="知乎专栏"><a href="#知乎专栏" class="headerlink" title="知乎专栏"></a>知乎专栏</h1><p>知乎上有很多和深度学习相关的专栏，而且在知乎上可以很方便的和作者进行互动交流，也是一个很方便的方式，下面是一些我订阅的专栏：</p>
-<ul>
-<li>炼丹实验室</li>
-<li>机器之心</li>
-<li>超智能体</li>
-<li>PaperWeekly</li>
-<li>深度学习：从入门到放弃</li>
-<li>智能单元</li>
-<li>深度学习大讲堂</li>
-</ul>
-<h1 id="网站"><a href="#网站" class="headerlink" title="网站"></a>网站</h1><p>这里收藏了一些不错的和深度学习相关的资源网站，可以参考：<br><a href="http://rsarxiv.github.io" target="_blank" rel="noopener">http://rsarxiv.github.io</a>, 经常包含一些最新的Deep Learning in NLP论文中文简介<br><a href="http://nlp.hivefire.com" target="_blank" rel="noopener">http://nlp.hivefire.com</a> ，包含最新的NLP资讯和论文<br><a href="https://github.com/dennybritz/deeplearning-papernotes" target="_blank" rel="noopener">https://github.com/dennybritz/deeplearning-papernotes</a> ，作者在Google Brain，会经常更新一些自己读论文的笔记。<br><a href="https://www.reddit.com/r/MachineLearning/" target="_blank" rel="noopener">https://www.reddit.com/r/MachineLearning/</a> ,Reddit的机器学习版，氛围活跃，大牛云集。</p>
-<h1 id="微信交流群"><a href="#微信交流群" class="headerlink" title="微信交流群"></a>微信交流群</h1><ul>
-<li>PaperWeekly: 想加群，请联系微信号：zhangjun168305, 群里的交流活跃，学术氛围很好。</li>
-<li>将门微信群： 里面大牛云集，想加群，请加群请关注<strong>将门创投</strong>的订阅号，里面有入群方式。</li>
-</ul>
-<h1 id="社交网络"><a href="#社交网络" class="headerlink" title="社交网络"></a>社交网络</h1><p>国内大牛一般是微博，国外大牛一般是Twitter,关注一下他们，可以了解到很多第一手的消息。</p>
-<p>上面是我平时收集深度学习论文和资讯的方式总结。我觉得更容易面临的问题，不是信息匮乏，而是信息负载，因此在有限的时间里，学会选择适合的阅读内容，更为重要。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -552,10 +395,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -563,6 +407,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -583,8 +431,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -626,6 +483,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#好的实验环境是成功的一半"><span class="nav-number">1.</span> <span class="nav-text">好的实验环境是成功的一半</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#画图"><span class="nav-number">2.</span> <span class="nav-text">画图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#从粗到细分阶段调参"><span class="nav-number">3.</span> <span class="nav-text">从粗到细分阶段调参</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#提高速度"><span class="nav-number">4.</span> <span class="nav-text">提高速度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#经验参数"><span class="nav-number">5.</span> <span class="nav-text">经验参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自动调参"><span class="nav-number">6.</span> <span class="nav-text">自动调参</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">8.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -759,6 +632,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
