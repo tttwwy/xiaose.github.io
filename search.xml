@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[线下AUC提升为什么不能带来线上效果提升?]]></title>
+    <url>%2F2019-03-03%2F30850.html</url>
+    <content type="text"><![CDATA[问题在推荐系统实践中，我们往往会遇到一个问题：线下AUC提升并不能带来线上效果提升，这个问题在推荐系统迭代的后期往往会更加普遍。 #原因：造成这个问题的具体原因上可能有以下几点： 样本 线下评测基于历史出现样本，而线上测试存在新样本。因此线下AUC提升可能只是在历史出现样本上有提升，但是对于线上新样本可能并没有效果。 历史数据本身由老模型产生，本身也是存在偏置的。 包含时间相关特征，存在特征穿越。 评估目标 AUC会对不同用户的不同item之间进行比较计算，而线上排序系统则是同一个用户的不同item。 线上效果只跟相关性有关，是需要排除position因素的。而线下样本是混杂position因素的，因此线上和线下评估不对等。 分布变化 DNN模型相比传统模型，一般得分分布会更平滑，和传统模型相比打分布不一致。而线上有些出价策略依赖了打分分布，例如有一些相关阈值，那么就可能产生影响。这个可能绘制CTR概率分布图来检查。 解决方案 使用无偏样本作为测试集。随机样本最好，不行的话，最好不要是基于老模型产生的线上样本。 使用gauc等指标，同时从测试集中去除无点击的用户。gauc基于session进行分组。例如对于搜索业务，把一次搜索query对应的一次用户的曝光点击行为作为一个session进行计算。 参考资料https://zhuanlan.zhihu.com/p/52930683https://www.zhihu.com/question/305823078https://zhuanlan.zhihu.com/p/35459467]]></content>
+      <tags>
+        <tag>原创</tag>
+        <tag>深度学习</tag>
+        <tag>推荐系统</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Character-based Joint Segmentation and POS Tagging for Chinese using Bidirectional RNN-CRF]]></title>
     <url>%2F2017-04-06%2F27292.html</url>
     <content type="text"><![CDATA[Character-based Joint Segmentation and POS Tagging for Chinese using Bidirectional RNN-CRF作者Yan Shao and Christian Hardmeier and Jorg Tiedemann and Joakim Nivre 单位Department of Linguistics and Philology, Uppsala UniversityDepartment of Modern Languages, University of Helsinki 关键词Bi-RNN-CRF，分词，词性标注，汉字embedding 文章来源https://arxiv.org/pdf/1704.01314.pdf 问题如何联合做中文分词和词性标注。 模型 这篇论文首先将双向GRU+CRF这种非常流行的序列标注模型应用到了分词和词性标注任务上。使用了联合训练的方式，即将分词的标签和词性标注的标签拼在一起，同时输出。例如夏天太热这个句子，分词的标签输出是B E S S，词性标注的标签输出是NT NT AD VA,那么联合的标签输出就是B-NT E-NT S-AD S-VA。 同时，这篇论文使用了三种汉字embedding方式 Concatenated N-gram：即使用包含这个字的n-gram词，来作为这个字的embedding,这样相比双向GRU的方式，可以更直接的考虑局部信息 Radicals and Orthographical Features：首先使用了部首信息，作为embedding，其次将汉字作为图像送给CNN，获取字的embedding 公开语料预训练好的字embedding 论文decoding阶段，使用了ensemble方法，把4个不同初始化方式的模型取平均，进行decoding 资源代码：https://github.com/yanshao9798/tagger 简评这篇文章将分词和词性标注进行联合，避免了两个任务间的错误传递问题。同时针对汉字特有的特点，探索了基于部首和汉字图像的embedding方式，对其他中文处理任务也有一定的启发。]]></content>
