@@ -275,7 +275,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://freecoder.com/2019-03-03/30850.html">
+    <link itemprop="mainEntityOfPage" href="http://freecoder.com/2019-03-03/30847.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="萧瑟">
@@ -294,7 +294,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019-03-03/30850.html" itemprop="url">线下AUC提升为什么不能带来线上效果提升?</a></h2>
+                <a class="post-title-link" href="/2019-03-03/30847.html" itemprop="url">线下AUC提升为什么不能带来线上效果提升?</a></h2>
         
 
         <div class="post-meta">
@@ -325,8 +325,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019-03-03/30850.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019-03-03/30850.html" itemprop="commentCount"></span>
+                <a href="/2019-03-03/30847.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019-03-03/30847.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -355,37 +355,24 @@
 
       
         
-          
-            <p>在推荐系统实践中，我们往往会遇到一个问题：线下AUC提升并不能带来线上效果提升，这个问题在推荐系统迭代的后期往往会更加普遍。</p>
+          <p>在推荐系统实践中，我们往往会遇到一个问题：线下AUC提升并不能带来线上效果提升，这个问题在推荐系统迭代的后期往往会更加普遍。</p>
 <p>在排除了低级失误bug以后，造成这个问题可能有下面几点原因：</p>
 <ol>
 <li><p>样本</p>
 <ul>
 <li>线下评测基于历史出现样本，而线上测试存在新样本。因此线下AUC提升可能只是在历史出现样本上有提升，但是对于线上新样本可能并没有效果。</li>
 <li>历史数据本身由老模型产生，本身也是存在偏置的。</li>
-<li>包含时间相关特征，存在特征穿越。</li>
-</ul>
-</li>
-<li><p>评估目标</p>
-<ul>
-<li>AUC计算的时候，不仅会涉及同一个用户的不同item，也会涉及不同用户的不同item，而线上排序系统每次排序只针对同一个用户的不同item进行打分。</li>
-<li>线上效果只跟相关性有关，是和position等偏置因素无关的。而线下一般是不同position的样本混合训练，因此线上和线下评估不对等。</li>
-</ul>
-</li>
-<li><p>分布变化：DNN模型相比传统模型，一般得分分布会更平滑，和传统模型相比打分布不一致。而线上有些出价策略依赖了打分分布，例如有一些相关阈值，那么就可能产生影响。这个可能绘制CTR概率分布图来检查。</p>
-</li>
-</ol>
-<p>那么如何解决呢？可以考虑下面的办法：</p>
-<ol>
-<li>使用无偏样本作为测试集。随机样本最好，不行的话，最好不要是基于老模型产生的线上样本。</li>
-<li>使用gauc等指标，同时从测试集中去除无点击的用户。gauc基于session进行分组。例如对于搜索业务，把一次搜索query对应的一次用户的曝光点击行为作为一个session进行计算。</li>
-</ol>
-<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p><a href="https://zhuanlan.zhihu.com/p/52930683" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/52930683</a><br><a href="https://www.zhihu.com/question/305823078" target="_blank" rel="noopener">https://www.zhihu.com/question/305823078</a><br><a href="https://zhuanlan.zhihu.com/p/35459467" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/35459467</a></p>
-
-          
+<li>包含时间相关特征，存在特征穿越。
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019-03-03/30847.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
-    </div>
+    </li></ul></li></ol></div>
     
     
     
